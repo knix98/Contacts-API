@@ -1,16 +1,11 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT;
 
-// bodyParser.urlencoded returns middleware that only parses urlencoded bodies(and not json bodies)
-//or in other words: looks at requests where the Content-Type header matches the type option
-//A new body object containing the parsed data is populated on the request object after the middleware (i.e. req.body).
-//This object will contain key-value pairs, where the value can be a string or array (when extended is false), or any type (when extended is true).
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 
 //keeping the route-matching middleware at the very end
 app.use("/", require("./routes/index"));
